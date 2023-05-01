@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stk_payments', function (Blueprint $table) {
+        Schema::create('stk_requests', function (Blueprint $table) {
             $table->id();
             $table->string('merchantRequestID')->index();
             $table->string('checkoutRequestID')->index();
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stk_payments');
+        Schema::dropIfExists('stk_requests');
     }
 };

@@ -126,6 +126,20 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'stk' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/stk.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
+
+        'fake-stk' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/fake-stk.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
     ],
 
 ];

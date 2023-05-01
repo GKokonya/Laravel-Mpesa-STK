@@ -13,27 +13,26 @@
     <script >
 
 
-    let checkoutRequestID ='';
+    let checkoutRequestID ="{{ Session::get('checkoutRequestID') }}";
 
-    let myInterval=setInterval(function() { 
+    let myInterval=setInterval( () => { 
         const form =  {checkoutRequestID:checkoutRequestID};
         fetchlnmo(form,myInterval)
     }, 3000);
 
 
-    function fetchlnmo(form,stopInterval){
-        axios.post('/checkout/mpesa/stk/confirm-payment', form)
+    let fetchlnmo = (checkoutRequestID,stopInterval) =>{
+        axios.post("{{ route('stk-requests.confirm') }}", checkoutRequestID)
         .then((response) => {
             if(response.data.resultCode=='0'){
                 clearInterval(stopInterval);
-                form.get(route('checkout.mpesa.stk.success'));
+                window.location.href = "{{ route('stk-requests.success') }}";
             }
 
             if(response.data.resultCode!='0' && response.data.resultCode!=null){
                 clearInterval(stopInterval);
-                form.get(route('checkout.mpesa.stk.failure'));
+                window.location.href = "{{ route('stk-requests.failure') }}";
             }
-
 
         })
         .catch((error) => {

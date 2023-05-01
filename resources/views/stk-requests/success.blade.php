@@ -1,0 +1,9 @@
+@extends('layouts.default')
+    @section('content')
+      <section>
+        <div class="my-12 mx-8 bg-teal-100 text-teal-500 py-12 px-12 text-xl mx-auto py-2 px-3 text-white rounded">
+          your donation failed!
+        </div>
+      </section>
+    @endsection
+      

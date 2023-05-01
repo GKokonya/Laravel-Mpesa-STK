@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Traits;
+namespace App\Traits;
 trait MpesaTrait {
  #get access token from mpesa
  public function getAccessToken()

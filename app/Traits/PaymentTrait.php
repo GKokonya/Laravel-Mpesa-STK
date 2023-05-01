@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Traits;
+namespace App\Traits;
 use App\Enums\PaymentStatus;
 
 use App\Models\Payment;
@@ -14,9 +14,12 @@ trait PaymentTrait {
     }
 
     #make payment status and order status as paid
-    public function updatePaymentStatus(Payment $payment){
-        #update payment status to paid
-        $payment->status =PaymentStatus::Paid;
-        $payment->update();
+    public function updatePaymentStatus($tracking_id){
+        $payment = Payment::where('tracking_id',$tracking_id)->first();
+        if($payment){
+            #update payment status to paid
+            $payment->status =PaymentStatus::Paid;
+            $payment->update();
+        }
     }
 }

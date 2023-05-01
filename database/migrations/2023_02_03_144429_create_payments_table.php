@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('tracking_id')->index();
             $table->string('type')->index();
             $table->decimal('amount',20,2);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 
