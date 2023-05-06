@@ -29,9 +29,11 @@
                 <li>
                   <a class="text-gray-500 transition hover:text-gray-500/75" href="{{ route('stk-requests.index') }}"> STK Requests </a>
                 </li>
+                <!--
                 <li>
                   <form action="{{ route('stk-requests.fake') }}" method="POST">@csrf <button type="submit" class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700">fake Stk</button></form>
                 </li>
+-->
               </ul>
             </nav>
 

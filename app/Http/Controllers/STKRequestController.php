@@ -34,7 +34,7 @@ class STKRequestController extends Controller
     }
 
     public function fake(){
-        $url = env('MPESA_URL').'/stk-requests/verify';
+        $url = env('MPESA_TEST_URL').'/stk-requests/verify';
         $data='
         {
             "Body": {
@@ -190,7 +190,7 @@ class STKRequestController extends Controller
         } 
         
         if(empty($mpesaIpAddress)){
-            Log::channel('fake-stk')->info(['mpesaResponse'=>$mpesaResponse]);
+            Log::channel('fake-stk')->info(['mpesaResponse'=>$mpesaResponse,['mpesaIP'=>$_SERVER['REMOTE_ADDR']]]);
         }
         //return ['data'=>'success'];
         

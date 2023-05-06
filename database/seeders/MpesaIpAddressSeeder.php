@@ -16,6 +16,10 @@ class MpesaIpAddressSeeder extends Seeder
     public function run()
     {
         //
+        
+        MpesaIpAddress::create(['ip_address'=>'192.168.123.183']);
+
+        MpesaIpAddress::create(['ip_address'=>'196.201.212.69']);
         MpesaIpAddress::create(['ip_address'=>'196.201.212.74']);
         MpesaIpAddress::create(['ip_address'=>'196.201.212.127']);
         MpesaIpAddress::create(['ip_address'=>'196.201.212.128']);
