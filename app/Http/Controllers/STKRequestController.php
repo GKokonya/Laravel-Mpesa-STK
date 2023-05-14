@@ -200,7 +200,7 @@ class STKRequestController extends Controller
         $checkoutRequestID=$jsonMpesaResponse->Body->stkCallback->CheckoutRequestID;
         $amount=$jsonMpesaResponse->Body->stkCallback->CallbackMetadata->Item[0]->Value;
         $mpesaReceiptNumber=$jsonMpesaResponse->Body->stkCallback->CallbackMetadata->Item[1]->Value;
-        $balance=$jsonMpesaResponse->Body->stkCallback->CallbackMetadata->Item[2]->Value;
+        //$balance=$jsonMpesaResponse->Body->stkCallback->CallbackMetadata->Item[2]->Value;
         $transactionDate=$jsonMpesaResponse->Body->stkCallback->CallbackMetadata->Item[3]->Value;
 
         #store in database
@@ -208,7 +208,7 @@ class STKRequestController extends Controller
 
         #check if transaction exist in database
         if($STKRequest){
-            $payment=["resultDesc"=>$resultDesc,"resultCode"=>$resultCode,'status'=>STKRequestStatus::Paid,"mpesaReceiptNumber"=>$mpesaReceiptNumber, "balance"=>$balance, "transactionDate"=>$transactionDate];
+            $payment=["resultDesc"=>$resultDesc,"resultCode"=>$resultCode,'status'=>STKRequestStatus::Paid,"mpesaReceiptNumber"=>$mpesaReceiptNumber, "transactionDate"=>$transactionDate];
             $result = $STKRequest->update($payment);
             if($result){
                 Log::info(['message'=>'success','data'=>$jsonMpesaResponse,'STKRequest'=>$STKRequest]);
