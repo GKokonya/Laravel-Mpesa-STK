@@ -132,13 +132,15 @@ class STKRequestController extends Controller
         if(!empty($mpesaIpAddress) && $resultCode==0){
             #Process Mpesa Transaction 
             Log::channel('stk')->info(['mpesaResponse'=>$mpesaResponse]);
-            $this->insertSuccessfulStkPayment($jsonMpesaResponse);
+            return $this->insertSuccessfulStkPayment($jsonMpesaResponse);
+            
         } 
 
         if(!empty($mpesaIpAddress) && $resultCode!=0){
             #insert failed stk request 
             Log::channel('stk')->info(['mpesaResponse'=>$mpesaResponse]);
             $this->insertFailedStkPayment($jsonMpesaResponse);
+            return 'payment failed';
         } 
         
         if(empty($mpesaIpAddress)){
@@ -207,7 +209,12 @@ class STKRequestController extends Controller
         #check if transaction exist in database
         if($STKRequest){
             $payment=["resultDesc"=>$resultDesc,"resultCode"=>$resultCode,'status'=>STKRequestStatus::Paid,"mpesaReceiptNumber"=>$mpesaReceiptNumber, "balance"=>$balance, "transactionDate"=>$transactionDate];
-            $STKRequest->update($payment);
+            $result = $STKRequest->update($payment);
+            if($result){
+                Log::info(['message'=>'success','data'=>$jsonMpesaResponse,'STKRequest'=>$STKRequest]);
+            }else{
+                Log::info(['message'=>'failed','data'=>$jsonMpesaResponse,'STKRequest'=>$STKRequest]);
+            }
         }
         
     }
