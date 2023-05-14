@@ -209,14 +209,8 @@ class STKRequestController extends Controller
         #check if transaction exist in database
         if($STKRequest){
             $payment=["resultDesc"=>$resultDesc,"resultCode"=>$resultCode,'status'=>STKRequestStatus::Paid,"mpesaReceiptNumber"=>$mpesaReceiptNumber, "transactionDate"=>$transactionDate];
-            $result = $STKRequest->update($payment);
-            if($result){
-                Log::info(['message'=>'success','data'=>$jsonMpesaResponse,'STKRequest'=>$STKRequest]);
-            }else{
-                Log::info(['message'=>'failed','data'=>$jsonMpesaResponse,'STKRequest'=>$STKRequest]);
-            }
+            $STKRequest->update($payment);
         }
-        
     }
 
     #store failed stk transaction into database 
