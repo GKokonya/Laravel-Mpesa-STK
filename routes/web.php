@@ -24,7 +24,6 @@ Route::prefix('stk-requests')->name('stk-requests.')->group(function(){
     Route::post('confirm', [STKRequestController::class, 'confirmPayment'])->name('confirm');
     Route::get('success', [STKRequestController::class, 'success'])->name('success');
     Route::get('failure', [STKRequestController::class, 'failure'])->name('failure');
-    Route::post('fake', [STKRequestController::class, 'fake'])->name('fake');
     Route::get('/', [STKRequestController::class, 'index'])->name('index');
     Route::get('/{checkoutRequestID}/edit', [STKRequestController::class, 'edit'])->name('edit');
     Route::put('/{checkoutRequestID}/update', [STKRequestController::class, 'update'])->name('update');

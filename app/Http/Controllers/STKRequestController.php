@@ -33,54 +33,6 @@ class STKRequestController extends Controller
         return view('stk-requests.stk');
     }
 
-    public function fake(){
-        $url = env('MPESA_TEST_URL').'/stk-requests/verify';
-        $data='
-        {
-            "Body": {
-            
-                "stkCallback": {
-                
-                    "MerchantRequestID": "29115-34620561-11",
-                    
-                    "CheckoutRequestID": "ws_CO_1912201910203639725",
-                    
-                    "ResultCode": 0,
-                    
-                    "ResultDesc": "The service request is processed successfully.",
-                
-                    "CallbackMetadata": {
-                    
-                        "Item": [
-                            {"Name": "Amount","Value": 2000.00},
-                            {"Name": "MpesaReceiptNumber","Value": "ZNLJ7RTD1SK"},
-                            {"Name": "TransactionDate","Value": 20191219102115},
-                            {"Name": "PhoneNumber","Value": 254700000000}
-                        ]
-                    }
-                
-                }
-            }
-        }';
-
-        $curl = curl_init();
-        curl_setopt_array(
-            $curl,
-            array(
-                    CURLOPT_URL => $url,
-                    CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_POST => true,
-                    CURLOPT_POSTFIELDS => $data
-                )
-            );
-        $curl_response = curl_exec($curl);
-        curl_close($curl);
-        return print_r($curl_response);
-
-
-    }
-
      #donate with mpesa Sim TooKit(STK)
      public function donate(Request $request){
         try{
@@ -140,7 +92,7 @@ class STKRequestController extends Controller
             "PartyA"=> $phone_number,
             "PartyB"=>  env('MPESA_STK_SHORTCODE'),
             "PhoneNumber"=> $phone_number,
-            "CallBackURL"=>env('MPESA_TEST_URL').'/stk_requests/verify',
+            "CallBackURL"=>env('MPESA_URL').'/stk-requests/verify',
             "AccountReference"=> "CompanyXLTD",
             "TransactionDesc"=> "Payment of X" 
           );
